@@ -11,4 +11,9 @@ class Event extends Model
 {
     /** @use HasFactory<\Database\Factories\EventFactory> */
     use HasFactory;
+
+    public function registrations()
+    {
+        return $this->hasMany(Registration::class);
+    }
 }

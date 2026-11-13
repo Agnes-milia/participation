@@ -1,11 +1,22 @@
 
 type Query {
+    # User base queries
     users: [User!]! @all
     user(id: ID! @eq): User @find
-    events: [Event!]! @all
+    # Example use of like operator
+    userLike(name: String! @like): [User!]! @all
+    # Example use of pagination, all data, but paginated
+    userPaginate: [User!]! @paginate
     event(id: ID! @eq): Event @find
+    # Example use of like operator
+    eventWhere(id: ID! @where(operator: "<=")): [Event!]! @all
+    # registration belongsto a user
+    registration(id: ID! @eq): Registration @find
+    # registration hasMany registrations
+    events: [Event!]! @all
 }
 type Mutation {
+    # User base mutations
     createUser(name: String!, email: String!, password: String!): User! @create
     updateUser(id: ID! @eq, name: String, email: String, password: String): User! @update
     deleteUser(id: ID! @eq): User @delete
@@ -28,6 +39,15 @@ type User {
 type Event{
     id: ID!
     title: String!
+    registrations: [Registration!]! @hasMany
+}
+
+type Registration{
+    id: ID!
+    user_id: ID!
+    event_id: ID!
+    datetime: DateTime!
+    user: User! @belongsTo
 }
 
 
