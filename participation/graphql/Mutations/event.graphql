@@ -1,0 +1,5 @@
+type Mutation{
+    createEvent(title: String!): Event! @create
+    updateEvent(id: ID! @eq, title: String! @eq): Event! @update
+    deleteEvent(id: ID! @eq): Event @delete
+}
