@@ -1,5 +1,6 @@
 extend type Mutation{
     deleteRegistration(id: ID! @eq): Registration @delete
+    createRegistration(user_id: ID! @eq, event_id: ID! @eq): Registration! @create
     restoreRegistration(id: ID! @eq): Registration 
     @field(resolver: "App\\GraphQL\\Mutations\\RegistrationMutation@restore")
     forceDeleteRegistration(id: ID! @eq): Registration @forceDelete

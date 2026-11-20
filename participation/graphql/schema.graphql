@@ -26,11 +26,15 @@ type User {
     "Unique email address."
     email: String!
     events: [Event!]! @belongsToMany
+    
 }
 type Event{
     # fields
     id: ID!
     title: String!
+    early_bird_price: Int!
+    early_bird_until: DateTime!
+    price_multiplier: Float!
     # registrations belongsto a user
     registrations: [Registration!]! @hasMany
 }
@@ -41,6 +45,8 @@ type Registration{
     event_id: ID!
     datetime: DateTime!
     user: User! @belongsTo
+    event: Event! @belongsTo
+    price: Int! @method(name: "priceCount")
 }
 
 
